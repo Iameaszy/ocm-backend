@@ -1,0 +1,55 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateMovieInput {
+  genre: String!
+  imdbRating: String!
+  plot: String!
+  poster: String!
+  rated: String!
+  released: String!
+  title: String!
+  year: String!
+}
+
+type FilterMoviesOutput {
+  movies: [Movie!]!
+  pagination: PaginationOutput!
+  total: Float!
+}
+
+type Movie {
+  _id: String!
+  genre: String!
+  imdbRating: String!
+  plot: String!
+  poster: String!
+  rated: String!
+  released: String!
+  title: String!
+  year: String!
+}
+
+type Mutation {
+  createMovie(movie: CreateMovieInput!): Movie!
+}
+
+type Page {
+  page: Float!
+  per_page: Float!
+}
+
+input PaginationInput {
+  limit: Float
+  page: Float
+}
+
+type PaginationOutput {
+  next: Page!
+  prev: Page!
+}
+
+type Query {
+  fetchMovies(pagination: PaginationInput): FilterMoviesOutput!
+}

@@ -1,0 +1,135 @@
+Arguments: 
+  /usr/bin/node /usr/share/yarn/bin/yarn.js add gmorgan
+
+PATH: 
+  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin:/usr/local/go/bin:/home/yusuf/.go/bin
+
+Yarn version: 
+  1.22.5
+
+Node version: 
+  16.13.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: https://registry.npmjs.org/gmorgan: Not found
+      at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66988:18)
+      at Request.self.callback (/usr/share/yarn/lib/cli.js:140749:22)
+      at Request.emit (node:events:390:28)
+      at Request.<anonymous> (/usr/share/yarn/lib/cli.js:141721:10)
+      at Request.emit (node:events:390:28)
+      at IncomingMessage.<anonymous> (/usr/share/yarn/lib/cli.js:141643:12)
+      at Object.onceWrapper (node:events:509:28)
+      at IncomingMessage.emit (node:events:402:35)
+      at endReadableNT (node:internal/streams/readable:1343:12)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+
+npm manifest: 
+  {
+      "name": "gofapay-api",
+      "version": "0.0.1",
+      "description": "",
+      "author": "",
+      "private": true,
+      "license": "UNLICENSED",
+      "scripts": {
+          "prebuild": "rimraf dist",
+          "build": "nest build",
+          "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+          "start": "nest start",
+          "dev": "nest start --watch",
+          "start:debug": "nest start --debug --watch",
+          "start:prod": "npx pm2-runtime start dist/main.js",
+          "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+          "test": "jest",
+          "test:watch": "jest --watch",
+          "test:cov": "jest --coverage",
+          "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+          "test:e2e": "jest --config ./test/jest-e2e.json",
+          "typeorm": "npx ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+          "migration:run": "npx ts-node --transpile-only ./node_modules/typeorm/cli.js migration:run",
+          "typeorm:migration:generate": "npm run typeorm -- migration:generate -n",
+          "preinstall": "npm install pm2 -g",
+          "heroku-postbuild": "npm run build"
+      },
+      "dependencies": {
+          "@nestjs/common": "^8.2.3",
+          "@nestjs/config": "^1.1.5",
+          "@nestjs/core": "^8.2.3",
+          "@nestjs/graphql": "^9.1.2",
+          "@nestjs/mongoose": "^9.0.1",
+          "@nestjs/platform-express": "^8.2.3",
+          "apollo-server-express": "^3.5.0",
+          "class-transformer": "^0.5.1",
+          "class-validator": "^0.13.2",
+          "cloudinary": "^1.23.0",
+          "graphql": "^15.7.2",
+          "graphql-subscriptions": "^2.0.0",
+          "graphql-tools": "^8.2.0",
+          "install": "^0.13.0",
+          "mongoose": "^6.0.13",
+          "morgan": "^1.10.0",
+          "npm": "^8.1.4",
+          "reflect-metadata": "^0.1.13",
+          "rimraf": "^3.0.2",
+          "rxjs": "^7.4.0"
+      },
+      "devDependencies": {
+          "@nestjs/cli": "^8.1.5",
+          "@nestjs/schematics": "^8.0.5",
+          "@nestjs/testing": "^8.2.3",
+          "@types/express": "^4.17.11",
+          "@types/fs-extra": "^9.0.6",
+          "@types/graphql": "^14.5.0",
+          "@types/jest": "^27.0.3",
+          "@types/morgan": "^1.9.3",
+          "@types/node": "^16.11.10",
+          "@types/supertest": "^2.0.10",
+          "@typescript-eslint/eslint-plugin": "^5.4.0",
+          "@typescript-eslint/parser": "^5.4.0",
+          "eslint": "^8.3.0",
+          "eslint-config-airbnb-typescript": "^16.0.0",
+          "eslint-config-prettier": "^8.3.0",
+          "eslint-plugin-import": "^2.22.0",
+          "eslint-plugin-prettier": "^4.0.0",
+          "jest": "^27.3.1",
+          "jest-junit": "^13.0.0",
+          "pm2": "^5.1.2",
+          "prettier": "^2.1.2",
+          "supertest": "^6.0.0",
+          "ts-jest": "^27.0.7",
+          "ts-loader": "^9.2.6",
+          "ts-node": "^10.4.0",
+          "tsconfig-paths": "^3.9.0",
+          "typescript": "^4.0.5"
+      },
+      "resolutions": {
+          "fs-capacitor": "^6.2.0",
+          "graphql-upload": "^11.0.0"
+      },
+      "jest": {
+          "moduleFileExtensions": [
+              "js",
+              "json",
+              "ts"
+          ],
+          "rootDir": "src",
+          "testRegex": ".*\\.spec\\.ts$",
+          "transform": {
+              "^.+\\.(t|j)s$": "ts-jest"
+          },
+          "collectCoverageFrom": [
+              "**/*.(t|j)s"
+          ],
+          "coverageDirectory": "../coverage",
+          "testEnvironment": "node"
+      }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
