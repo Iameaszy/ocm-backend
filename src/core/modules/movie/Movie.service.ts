@@ -36,12 +36,9 @@ export class MovieService {
         movies: Movie[]
     ): Promise<Movie[]> {
         const movieTitles = movies.map(({title}) => title);
-        this.connection.on("open", async () => {
-            const bulk = this.movieModel.collection.initializeUnorderedBulkOp();
-            console.log({bulk})
-            movies.forEach(({title, ...doc}) => bulk.find({title}).upsert().updateOne({$set: doc}))
-            await bulk.execute();
-        })
+        const bulk = this.movieModel.collection.initializeUnorderedBulkOp();
+        movies.forEach(({title, ...doc}) => bulk.find({title}).upsert().updateOne({$set: doc}))
+        await bulk.execute();
         return this.movieModel.find({title: {$in: movieTitles}});
     }
 }

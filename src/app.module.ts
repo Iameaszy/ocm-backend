@@ -18,6 +18,7 @@ import { EnvTypes } from './config/types';
         GraphQLModule.forRoot({
             autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
             sortSchema: true,
+            playground: true,
             context: ({ req }) => ({ req }),
             installSubscriptionHandlers: true,
             schemaDirectives: {
