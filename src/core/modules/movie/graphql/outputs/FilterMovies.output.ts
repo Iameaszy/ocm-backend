@@ -5,19 +5,19 @@ import {Movie} from '../../../../../schemas/movie'
 @ObjectType()
 class Page {
     @Field()
-    page: number;
+    page?: number;
 
     @Field()
-    per_page: number
+    per_page?: number
 }
 
 @ObjectType()
 class PaginationOutput {
-    @Field()
-    next: Page;
+    @Field({nullable: true})
+    next?: Page;
 
-    @Field()
-    prev: Page;
+    @Field({nullable: true})
+    prev?: Page;
 }
 
 

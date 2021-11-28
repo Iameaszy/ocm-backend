@@ -28,4 +28,11 @@ export class MovieResolver {
     ): Promise<Movie> {
         return this.movieService.create(movie);
     }
+
+    @Mutation(() => [Movie])
+    private async createMovies(
+        @Args({ name: 'movies', type: () => [CreateMovieInput] }) movies: CreateMovieInput[],
+    ): Promise<Movie[]> {
+        return this.movieService.bulkCreate(movies);
+    }
 }

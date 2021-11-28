@@ -5,10 +5,13 @@ import { Document, Types } from 'mongoose';
 export type MovieDocument = Movie & Document;
 
 @ObjectType()
-@Schema()
+@Schema({timestamps: true})
 export class Movie {
   @Field()
   _id?: string;
+
+  @Field()
+  id?: string;
 
   @Field()
   @Prop({unique: true})

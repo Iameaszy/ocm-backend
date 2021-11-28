@@ -6,26 +6,42 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Movie, MovieDocument } from 'src/schemas/movie';
 import { Model } from 'mongoose';
 import { PaginationInput } from 'src/core/common/graphql/inputs/pagination.input';
+import { InjectConnection } from '@nestjs/mongoose';
 import {paginate} from '../../common/paginate';
+import { Connection } from 'mongoose';
 
 
 @Injectable()
 export class MovieService {
     constructor(
-        @InjectModel(Movie.name) private movieModel: Model<MovieDocument>
+        @InjectModel(Movie.name) private movieModel: Model<MovieDocument>,
+        @InjectConnection() private connection: Connection
     ) {}
 
     public async filter(
         paginateInput?: PaginationInput,
     ): Promise<MoviesFilterResponse> {
         const {data: movies, total, pagination} = await paginate<MovieDocument>({model: this.movieModel, ...paginateInput})
-        console.log({movies, total, pagination})
         return {movies, total, pagination}
     }
 
     public async create(
-        movie: Movie
+        movieObj: Movie
     ): Promise<Movie> {
-        return this.movieModel.create(movie);
+        const movie = await this.movieModel.findOneAndUpdate({title: movieObj.title}, {$set: movieObj}, {upsert: true})
+        return movie!;
+    }
+
+    public async bulkCreate(
+        movies: Movie[]
+    ): Promise<Movie[]> {
+        const movieTitles = movies.map(({title}) => title);
+        this.connection.on("open", async () => {
+            const bulk = this.movieModel.collection.initializeUnorderedBulkOp();
+            console.log({bulk})
+            movies.forEach(({title, ...doc}) => bulk.find({title}).upsert().updateOne({$set: doc}))
+            await bulk.execute();
+        })
+        return this.movieModel.find({title: {$in: movieTitles}});
     }
 }

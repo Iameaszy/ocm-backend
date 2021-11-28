@@ -22,6 +22,7 @@ type FilterMoviesOutput {
 type Movie {
   _id: String!
   genre: String!
+  id: String!
   imdbRating: String!
   plot: String!
   poster: String!
@@ -33,6 +34,7 @@ type Movie {
 
 type Mutation {
   createMovie(movie: CreateMovieInput!): Movie!
+  createMovies(movies: [CreateMovieInput!]!): [Movie!]!
 }
 
 type Page {
@@ -46,8 +48,8 @@ input PaginationInput {
 }
 
 type PaginationOutput {
-  next: Page!
-  prev: Page!
+  next: Page
+  prev: Page
 }
 
 type Query {

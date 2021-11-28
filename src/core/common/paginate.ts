@@ -5,7 +5,7 @@ export const paginate = async <T>({ page = 1, limit = 0, query = {}, model: Mode
   const skip = (page - 1) * limit;
   const endIndex = page * limit;
   const totalDocumentsCount = await Model.find(query).countDocuments({}).exec();
-  const options = { limit, skip};
+  const options = { limit };
 
   if (endIndex < totalDocumentsCount) {
       pagination.next = {
@@ -20,8 +20,7 @@ export const paginate = async <T>({ page = 1, limit = 0, query = {}, model: Mode
         per_page:limit
       };
   }
-  console.log({query, options})
-  const data = await Model.find(query, options).exec();
+  const data = await Model.find(query).skip(skip).limit(limit).exec();
 
   return { pagination, data, total: totalDocumentsCount }
 }
